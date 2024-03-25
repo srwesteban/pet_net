@@ -34,12 +34,12 @@ body {
 }
 
     .card-footer .links a {
-        color: white; /* Cambiar el color del texto a blanco */
+        color: white; 
         margin-left: 5px;
     }
 
         .card-footer .links a:hover {
-            color: #FFC312; /* Cambiar el color del texto al pasar el mouse sobre el enlace */
+            color: #FFC312; 
         }
 
 .input-group-prepend span {

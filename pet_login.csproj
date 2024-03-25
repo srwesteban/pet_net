@@ -146,9 +146,12 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
-    <Content Include="Content\css\Login.css" />
-    <Content Include="Content\Images\Logos\logopetmap.png" />
-    <Content Include="Content\Images\p.jpg" />
+    <Content Include="Css\Login.css" />
+    <Content Include="Images\imagenesMapa\feliz.png" />
+    <Content Include="Images\imagenesMapa\persona.png" />
+    <Content Include="Images\Logos\logopetmap.png" />
+    <Content Include="Images\p.jpg" />
+    <Content Include="Css\Map.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -188,6 +191,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\css\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

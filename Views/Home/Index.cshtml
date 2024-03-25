@@ -1,33 +1,99 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa</title>
 
-<main>
-    <section class="row" aria-labelledby="aspnetTitle">
-        <h1 id="title">ASP.NET</h1>
-        <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-        <p><a href="https://asp.net" class="btn btn-primary btn-md">Learn more &raquo;</a></p>
-    </section>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <link href="~/Css/Map.css" rel="stylesheet" />
+</head>
+<body>
 
-    <div class="row">
-        <section class="col-md-4" aria-labelledby="gettingStartedTitle">
-            <h2 id="gettingStartedTitle">Getting started</h2>
-            <p>
-                ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-                enables a clean separation of concerns and gives you full control over markup
-                for enjoyable, agile development.
-            </p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-        </section>
-        <section class="col-md-4" aria-labelledby="librariesTitle">
-            <h2 id="librariesTitle">Get more libraries</h2>
-            <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-        </section>
-        <section class="col-md-4" aria-labelledby="hostingTitle">
-            <h2 id="hostingTitle">Web Hosting</h2>
-            <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-        </section>
+    <div id="map" class="relative w-full h-screen mb-10 max-h-[80vh] z-0"></div>
+
+
+    <div class="modal-footer">
+        <form id="searchForm">
+            <label for="coordsInput">Ingrese las coordenadas (latitud, longitud):</label><br>
+            <div class="input-container">
+                <input type="text" id="coordsInput" name="coords" placeholder="Ejemplo: 1.2136,-77.2811" required>
+                <button type="submit">Buscar</button>
+            </div>
+        </form>
     </div>
-</main>
+
+    <script>
+        var userLocation = null;
+        var petMarker = null;
+
+        var iconMascota = L.icon({
+            iconUrl: "/Images/imagenesMapa/feliz.png",
+            iconSize: [30, 30],
+            iconAnchor: [15, 30]
+        });
+
+        var iconPersona = L.icon({
+            iconUrl: "/Images/imagenesMapa/persona.png",
+            iconSize: [30, 30],
+            iconAnchor: [15, 30]
+        });
+
+        var map = L.map('map').setView([1.2136, -77.2811], 13);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        function agregarMarcador(lat, lng, icon) {
+            return L.marker([lat, lng], { icon: icon }).addTo(map);
+        }
+
+        function actualizarUbicacionPersona(position) {
+            var lat = position.coords.latitude;
+            var lng = position.coords.longitude;
+            if (userLocation) {
+                map.removeLayer(userLocation);
+            }
+            userLocation = agregarMarcador(lat, lng, iconPersona);
+            map.setView([lat, lng], map.getZoom());
+        }
+
+        function errorUbicacionPersona() {
+            console.error('Error al obtener la ubicación del usuario.');
+        }
+
+        if (navigator.geolocation) {
+            navigator.geolocation.watchPosition(actualizarUbicacionPersona, errorUbicacionPersona);
+        } else {
+            console.error('El navegador no soporta geolocalización.');
+        }
+
+        document.getElementById('searchForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+            var coords = document.getElementById('coordsInput').value.trim();
+            var latLng = coords.split(',').map(function (coord) {
+                return parseFloat(coord.trim());
+            });
+            if (latLng.length === 2 && !isNaN(latLng[0]) && !isNaN(latLng[1])) {
+                var lat = latLng[0];
+                var lng = latLng[1];
+                map.setView([lat, lng], 13);
+                if (petMarker) {
+                    map.removeLayer(petMarker);
+                }
+                petMarker = agregarMarcador(lat, lng, iconMascota);
+            } else {
+                alert('Coordenadas no válidas. Por favor, ingrese números válidos.');
+            }
+        });
+
+        // Add initial marker for the pet
+        petMarker = agregarMarcador(1.22, -77.29, iconMascota);
+    </script>
+
+</body>
+</html>
