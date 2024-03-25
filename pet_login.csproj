@@ -146,6 +146,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Css\Layout.css" />
     <Content Include="Css\Login.css" />
     <Content Include="Images\imagenesMapa\feliz.png" />
     <Content Include="Images\imagenesMapa\persona.png" />
