@@ -13,8 +13,11 @@ namespace pet_login.Controllers
     {
         public ActionResult Index()
         {
+            Usuario usuario = (Usuario)Session["usuario"];
+            ViewBag.Usuario = usuario;
             return View();
         }
+
 
         public ActionResult About()
         {

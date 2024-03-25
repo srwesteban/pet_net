@@ -1,6 +1,5 @@
-﻿@{
-    ViewBag.Title = "Home Page";
-}
+﻿@model pet_login.Models.Usuario
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -14,6 +13,7 @@
 </head>
 <body>
 
+
     <div id="map" class="relative w-full h-screen mb-10 max-h-[80vh] z-0"></div>
 
 
@@ -21,7 +21,7 @@
         <form id="searchForm">
             <label for="coordsInput">Ingrese las coordenadas (latitud, longitud):</label><br>
             <div class="input-container">
-                <input type="text" id="coordsInput" name="coords" placeholder="Ejemplo: 1.2136,-77.2811" required>
+                <input type="text" id="coordsInput" name="coords" placeholder="     Ejemplo: 1.2136,-77.2811" required>
                 <button type="submit">Buscar</button>
             </div>
         </form>
@@ -43,7 +43,7 @@
             iconAnchor: [15, 30]
         });
 
-        var map = L.map('map').setView([1.2136, -77.2811], 15);
+        var map = L.map('map').setView([1.2136, -77.2811], 16);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
@@ -90,8 +90,6 @@
                 alert('Coordenadas no válidas. Por favor, ingrese números válidos.');
             }
         });
-
-        // Add initial marker for the pet
         petMarker = agregarMarcador(1.22, -77.29, iconMascota);
     </script>
 

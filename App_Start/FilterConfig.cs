@@ -1,4 +1,4 @@
-﻿using System.Web;
+﻿using pet_login.Permisos;
 using System.Web.Mvc;
 
 namespace pet_login
@@ -7,6 +7,7 @@ namespace pet_login
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
+            filters.Add(new UsuarioActionFilter());
             filters.Add(new HandleErrorAttribute());
         }
     }

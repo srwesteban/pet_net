@@ -1,9 +1,11 @@
-﻿<!DOCTYPE html>
+﻿@model pet_login.Models.Usuario
+
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Navbar</title>
+    <title>Map</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
@@ -29,7 +31,7 @@
 <body>
     <nav class="navbar navbar-expand-md navbar-dark bg-black fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="@Url.Action("Index", "Home")">
                 <img src="~/Images/Logos/logopetmap.png" alt="Logo de PetMap" width="200">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -37,8 +39,17 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
+                    <li class="nav-item" style="display: flex; align-items: center;">
+                        @if (ViewBag.Usuario != null)
+                        {
+                            <span class="badge badge-pill badge-light ml-1">@ViewBag.Usuario.Correo</span>
+                        }
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="@Url.Action("About", "Home")">Instrucciones</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("Contact", "Home")">Contacto</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="@Url.Action("Contact", "Home")">Contacto</a>
@@ -54,10 +65,11 @@
     <div class="container mt-5">
         @RenderBody()
     </div>
-
-    <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <!-- Bootstrap JS -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        var usuario = @Html.Raw(Json.Encode(ViewBag.Usuario));
+        console.log(usuario);
+    </script>
 </body>
 </html>
