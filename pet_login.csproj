@@ -152,7 +152,7 @@
     <Content Include="Images\imagenesMapa\feliz.png" />
     <Content Include="Images\imagenesMapa\persona.png" />
     <Content Include="Images\Logos\logopetmap.png" />
-    <Content Include="Images\p.jpg" />
+    <Content Include="Images\Backgound\p.jpg" />
     <Content Include="Css\Map.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />

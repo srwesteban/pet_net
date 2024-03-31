@@ -1,7 +1,7 @@
 ﻿@import url('https://fonts.googleapis.com/css?family=Numans');
 
 body {
-    background-image: url('/Content/Images/p.jpg');
+    background-image: url('../Images/Backgound/p.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     height: 100vh;
